@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.nishitadutta.brainapp"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
@@ -28,6 +28,8 @@ dependencies {
     compile 'com.android.support:support-v4:24.1.1'
     compile 'com.google.firebase:firebase-database:9.4.0'
     compile 'com.google.firebase:firebase-auth:9.4.0'
+    compile 'com.google.android.gms:play-services-auth:9.4.0'
+    compile 'com.facebook.android:facebook-android-sdk:4.9.0'
     compile 'com.jakewharton:butterknife:8.2.1'
     compile 'com.intuit.sdp:sdp-android:1.0.2'
     compile 'com.ogaclejapan.smarttablayout:library:1.6.0@aar'
@@ -35,4 +37,6 @@ dependencies {
     compile 'com.mikepenz:fontawesome-typeface:4.4.0.1@aar'
     compile 'com.mikepenz:iconics-core:2.6.5@aar'
     compile 'com.rengwuxian.materialedittext:library:2.0.3'
+    compile 'com.github.Slyce-Inc:SlyceMessaging:1.1.2'
 }
+apply plugin: 'com.google.gms.google-services'
