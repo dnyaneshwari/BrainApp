@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
     //Facebook
     static LoginManager loginManager;
     CallbackManager callbackManager;
-    private ArrayList<String> permissions = new ArrayList<>();
 
     @OnClick(R.id.btn_google_login)
     public void googleSignIn() {
@@ -104,9 +103,6 @@ public class LoginActivity extends AppCompatActivity {
         //Facebook button callback register
         loginManager = LoginManager.getInstance();
         callbackManager = CallbackManager.Factory.create();
-        permissions.add("user_friends");
-        permissions.add("public_profile");
-        permissions.add("email");
         btnFacebookLogin=(LoginButton)findViewById(R.id.btn_facebook_login);
         btnFacebookLogin.setReadPermissions("email", "public_profile");
         btnFacebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
