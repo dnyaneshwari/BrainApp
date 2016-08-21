@@ -129,6 +129,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                         }
                         SharedPreferenceUtils.getInstance(LoginActivity.this).setValue(Constants.FACEBOOK_ID, facebookUserId);
                     }
+
                 });
 
                 Bundle parameters = new Bundle();

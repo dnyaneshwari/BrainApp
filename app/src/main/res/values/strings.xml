@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">BrainApp</string>
     <string name="app_id">291081261264272</string>
+    <string name="title_activity_loggedin">LoggedinActivity</string>
+    <string name="select_chat">Chat</string>
+    <string name="select_customize">Customize</string>
 </resources>
