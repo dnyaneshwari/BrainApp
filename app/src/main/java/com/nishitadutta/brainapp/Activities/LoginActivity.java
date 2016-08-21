@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -23,6 +24,8 @@ import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,26 +50,29 @@ import butterknife.OnClick;
 /**
  * Created by Nishita on 18-08-2016.
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
 
+    private static final String LOG_TAG="LoginActivity";
+
+    //Firebase
     private FirebaseAuth mFireBaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
-    private static final int REQUEST_CODE_GOOGLE_SIGN_IN = 1;
-    GoogleApiClient mGoogleApiClient;
-
-    @BindView(R.id.btn_facebook_login)
-    LoginButton btnFacebookLogin;
-
-    @BindView(R.id.btn_google_login)
-    com.google.android.gms.common.SignInButton btnGoogleLogin;
 
     //Facebook
     static LoginManager loginManager;
     CallbackManager callbackManager;
+    @BindView(R.id.btn_facebook_login)
+    LoginButton btnFacebookLogin;
 
+    //Google
+    private static final int REQUEST_CODE_GOOGLE_SIGN_IN = 9001;
+    GoogleApiClient mGoogleApiClient;
+    @BindView(R.id.btn_google_login)
+    SignInButton btnGoogleLogin;
     @OnClick(R.id.btn_google_login)
-    public void googleSignIn() {
+    public void googleSignIn(View v) {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+        Log.e(LOG_TAG, "Google Sign In button clicked");
         startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_SIGN_IN);
     }
 
@@ -75,15 +81,9 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
-
         ButterKnife.bind(this);
-        // Configure Google Sign In
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(Constants.FIREBASE_WEB_CLIENT_ID)
-                .requestEmail()
-                .build();
 
-        //get firebase auth
+        //Firebase
         mFireBaseAuth = FirebaseAuth.getInstance();
 
 
@@ -100,7 +100,17 @@ public class LoginActivity extends AppCompatActivity {
         };
 
 
-        //Facebook button callback register
+        // Configure Google Sign In
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(Constants.FIREBASE_WEB_CLIENT_ID)
+                .requestEmail()
+                .build();
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
+
+        //Facebook
         loginManager = LoginManager.getInstance();
         callbackManager = CallbackManager.Factory.create();
         btnFacebookLogin=(LoginButton)findViewById(R.id.btn_facebook_login);
@@ -139,8 +149,13 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, "Facebook Sign in failed. Please try again", Toast.LENGTH_SHORT).show();
             }
         });
-
-
+        /*btnGoogleLogin=(SignInButton)findViewById(R.id.btn_google_login);
+        btnGoogleLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e(LOG_TAG,"google sign in button clicked");
+            }
+        });*/
     }
 
     private void firebaseAuthWithGoogle(final GoogleSignInAccount acct) {
@@ -213,4 +228,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+        Log.d(LOG_TAG, "onConnectionFailed:" + connectionResult);
+        Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
+    }
 }

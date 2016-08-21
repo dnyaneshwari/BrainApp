@@ -14,6 +14,7 @@
 
 
     <com.google.android.gms.common.SignInButton
+        android:onClick="googleSignIn"
         android:id="@+id/btn_google_login"
         android:layout_height="wrap_content"
         android:layout_width="wrap_content"
