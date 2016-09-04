@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">BrainApp</string>
     <string name="app_id">291081261264272</string>
+
+    <string name="facebook_application_id" translatable="false">291081261264272</string>
+
+    <array name="facebook_permissions">
+        <item>public_profile</item>
+        <item>email</item>
+    </array>
 </resources>

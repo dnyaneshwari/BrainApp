@@ -38,6 +38,11 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.nishitadutta.brainapp.Global.Constants;
 import com.nishitadutta.brainapp.R;
 import com.nishitadutta.brainapp.Utils.SharedPreferenceUtils;
+import com.twitter.sdk.android.core.Callback;
+import com.twitter.sdk.android.core.Result;
+import com.twitter.sdk.android.core.TwitterException;
+import com.twitter.sdk.android.core.TwitterSession;
+import com.twitter.sdk.android.core.identity.TwitterLoginButton;
 
 import org.json.JSONObject;
 
@@ -57,6 +62,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     //Firebase
     private FirebaseAuth mFireBaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    //Twitter
+    @BindView(R.id.twitter_login_button)
+    TwitterLoginButton loginButton;
 
     //Facebook
     static LoginManager loginManager;
@@ -99,6 +107,25 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             }
         };
 
+        //Twitter
+
+        loginButton.setCallback(new Callback<TwitterSession>() {
+            @Override
+            public void success(Result<TwitterSession> result) {
+                // The TwitterSession is also available through:
+                // Twitter.getInstance().core.getSessionManager().getActiveSession()
+                TwitterSession session = result.data;
+                // TODO: Remove toast and use the TwitterSession's userID
+                // with your app's user model
+                String msg = "@" + session.getUserName() + " logged in! (#" + session.getUserId() + ")";
+                Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
+            }
+            @Override
+            public void failure(TwitterException exception) {
+                Log.d("TwitterKit", "Login with Twitter failure", exception);
+            }
+        });
+
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -113,7 +140,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Facebook
         loginManager = LoginManager.getInstance();
         callbackManager = CallbackManager.Factory.create();
-        btnFacebookLogin=(LoginButton)findViewById(R.id.btn_facebook_login);
         btnFacebookLogin.setReadPermissions("email", "public_profile");
         btnFacebookLogin.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
