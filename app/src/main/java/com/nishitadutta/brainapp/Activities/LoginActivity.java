@@ -220,10 +220,11 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        //Facebook
         callbackManager.onActivityResult(requestCode, resultCode, data);
 
-
-
+        //Google
         if (requestCode == REQUEST_CODE_GOOGLE_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
@@ -237,6 +238,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 // ...
             }
         }
+
         //Twitter
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
