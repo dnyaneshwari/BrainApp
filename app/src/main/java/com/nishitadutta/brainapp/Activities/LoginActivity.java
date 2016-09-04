@@ -237,6 +237,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 // ...
             }
         }
+        //Twitter
+        loginButton.onActivityResult(requestCode, resultCode, data);
     }
 
 
