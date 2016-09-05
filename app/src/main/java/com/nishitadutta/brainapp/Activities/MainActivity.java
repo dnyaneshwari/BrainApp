@@ -1,7 +1,9 @@
 package com.nishitadutta.brainapp.Activities;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
         Fabric.with(this, new Twitter(authConfig));
         setContentView(R.layout.activity_main);
         FirebaseAuth auth= FirebaseAuth.getInstance();
-        if(auth.getCurrentUser()==null)
-            startActivityForResult(
+        if(auth.getCurrentUser()==null) {
+           /* startActivityForResult(
                 AuthUI.getInstance()
                         .createSignInIntentBuilder()
                         .setProviders(
@@ -34,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
                                 AuthUI.FACEBOOK_PROVIDER)
                         .build(),
                 RC_SIGN_IN);
-
+            */
+            Log.e(this.getLocalClassName(), "Not logged in");
+            Intent in = new Intent(this, LoginActivity.class);
+            startActivity(in);
+        }
+        else{
+            Log.e(this.getLocalClassName(), "logged in");
+            Intent in= new Intent(this, ChatActivity_.class);
+            startActivity(in);
+        }
     }
 }
