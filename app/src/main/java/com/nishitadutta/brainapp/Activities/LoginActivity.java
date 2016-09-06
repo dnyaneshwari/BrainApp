@@ -89,6 +89,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         startActivityForResult(signInIntent, REQUEST_CODE_GOOGLE_SIGN_IN);
     }
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -289,6 +290,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         //Twitter
         loginButton.onActivityResult(requestCode, resultCode, data);
     }
+
+
 
 
     @Override

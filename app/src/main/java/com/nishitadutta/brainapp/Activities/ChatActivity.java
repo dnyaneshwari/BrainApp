@@ -7,14 +7,20 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.webkit.CookieManager;
+import android.webkit.CookieSyncManager;
 import android.widget.Toast;
 
+import com.facebook.login.LoginManager;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.gson.Gson;
 import com.nishitadutta.brainapp.Global.Constants;
 import com.nishitadutta.brainapp.Objects.BrainResponse;
 import com.nishitadutta.brainapp.R;
+import com.twitter.sdk.android.Twitter;
 
 import org.androidannotations.annotations.AfterInject;
 import org.androidannotations.annotations.Background;
@@ -48,6 +54,7 @@ public class ChatActivity extends AppCompatActivity {
         return true;
     }
 
+    GoogleApiClient mGoogleApiClient;
     FirebaseAuth auth;
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -57,6 +64,14 @@ public class ChatActivity extends AppCompatActivity {
                 auth= FirebaseAuth.getInstance();
                 auth.signOut();
                 Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+                LoginManager.getInstance().logOut();
+                CookieSyncManager.createInstance(this);
+                CookieManager cookieManager = CookieManager.getInstance();
+                cookieManager.removeSessionCookie();
+                Twitter.getSessionManager().clearActiveSession();
+                Twitter.getSessionManager().clearSession(item.getItemId());
+                Twitter.logOut();
+                //Auth.GoogleSignInApi.signOut(mGoogleApiClient);
                 Intent intent=new Intent(this, MainActivity.class);
                 startActivity(intent);
                 finish();
@@ -66,9 +81,6 @@ public class ChatActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    //rest of app
-
-
 
     FirebaseUser user;
     OkHttpClient client = new OkHttpClient();
