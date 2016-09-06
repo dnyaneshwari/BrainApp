@@ -50,6 +50,7 @@ import org.json.JSONObject;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import me.wangyuwei.particleview.ParticleView;
 
 /**
  * Created by Nishita on 18-08-2016.
@@ -73,6 +74,9 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @BindView(R.id.btn_facebook_login)
     LoginButton btnFacebookLogin;
 
+    @BindView(R.id.particle_view)
+    ParticleView particleView;
+
     //Google
     private static final int REQUEST_CODE_GOOGLE_SIGN_IN = 9001;
     GoogleApiClient mGoogleApiClient;
@@ -91,6 +95,8 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+
+        particleView.startAnim();
 
         //Firebase
         mFireBaseAuth = FirebaseAuth.getInstance();

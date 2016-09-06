@@ -43,26 +43,5 @@ public class MainActivity extends AppCompatActivity{
             startActivity(in);
             finish();
         }
-
-
-        /*else if (!SharedPreferenceUtils.getInstance(this).getStringValue("googleId", "").equals("")) {
-            intent = new Intent(this, ChatActivity_.class);
-            startActivity(intent);
-            finish();
-        } else if (!SharedPreferenceUtils.getInstance(this).getStringValue("facebookUserId", "").equals("")) {
-            intent = new Intent(this, ChatActivity_.class);
-            startActivity(intent);
-            finish();
-        } else if (!SharedPreferenceUtils.getInstance(this).getStringValue("twitterUserId", "").equals("")) {
-            intent = new Intent(this, ChatActivity_.class);
-            startActivity(intent);
-            finish();
-        }
-        else {
-            intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        }*/
     }
-
 }
