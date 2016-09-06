@@ -25,26 +25,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY, TWITTER_SECRET);
         Fabric.with(this, new Twitter(authConfig));
-        setContentView(R.layout.activity_main);
         FirebaseAuth auth= FirebaseAuth.getInstance();
         if(auth.getCurrentUser()==null) {
-           /* startActivityForResult(
-                AuthUI.getInstance()
-                        .createSignInIntentBuilder()
-                        .setProviders(
-                                AuthUI.GOOGLE_PROVIDER,
-                                AuthUI.FACEBOOK_PROVIDER)
-                        .build(),
-                RC_SIGN_IN);
-            */
             Log.e(this.getLocalClassName(), "Not logged in");
             Intent in = new Intent(this, LoginActivity.class);
             startActivity(in);
+            finish();
         }
         else{
             Log.e(this.getLocalClassName(), "logged in");
             Intent in= new Intent(this, ChatActivity_.class);
             startActivity(in);
+            finish();
         }
     }
 }

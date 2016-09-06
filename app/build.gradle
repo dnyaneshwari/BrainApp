@@ -67,5 +67,6 @@ dependencies {
     apt 'com.google.dagger:dagger-compiler:2.6'
     provided 'javax.annotation:jsr250-api:1.0'
     compile 'com.google.code.gson:gson:2.7'
+    compile 'me.wangyuwei:ParticleView:1.0.3'
 }
 apply plugin: 'com.google.gms.google-services'
