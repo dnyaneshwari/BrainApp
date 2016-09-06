@@ -18,10 +18,10 @@
         </activity>
 
         <activity android:name=".Activities.LoginActivity">
-
-
         </activity>
-        <activity android:name=".Activities.ChatActivity_"/>
+
+        <activity android:name=".Activities.ChatActivity_">
+        </activity>
 
         <activity
             tools:replace="android:theme"

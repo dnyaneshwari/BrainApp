@@ -8,25 +8,26 @@
     <com.facebook.login.widget.LoginButton
         android:id="@+id/btn_facebook_login"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="220dp"
         android:layout_gravity="center"
-        android:layout_margin="15dp"/>
+        android:layout_margin="5dp"/>
 
 
     <com.google.android.gms.common.SignInButton
         android:onClick="googleSignIn"
         android:id="@+id/btn_google_login"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_width="240dp"
         android:layout_gravity="center"
-        android:padding="15dp"/>
+        android:padding="5dp"/>
 
     <com.twitter.sdk.android.core.identity.TwitterLoginButton
         android:id="@+id/twitter_login_button"
-        android:layout_width="wrap_content"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"/>
+        android:layout_centerInParent="true"
+        android:layout_margin="5dp"/>
 
-        android:layout_margin="15dp"/>
+        <!--android:layout_margin = "15dp"-->
 
 </LinearLayout>

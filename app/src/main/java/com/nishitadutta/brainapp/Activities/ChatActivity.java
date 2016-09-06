@@ -1,8 +1,12 @@
 package com.nishitadutta.brainapp.Activities;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +39,36 @@ import okhttp3.Response;
  */
 @EActivity(R.layout.activity_chat)
 public class ChatActivity extends AppCompatActivity {
+
+    //Logout option in the action bar will take the user to the login activity
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.action_bar, menu);
+        return true;
+    }
+
+    FirebaseAuth auth;
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle presses on the action bar items
+        switch (item.getItemId()) {
+            case R.id.logout:
+                auth= FirebaseAuth.getInstance();
+                auth.signOut();
+                Toast.makeText(this, "Logged out", Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                //logout code
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+    //rest of app
+
+
 
     FirebaseUser user;
     OkHttpClient client = new OkHttpClient();

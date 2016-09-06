@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     //Firebase
     private FirebaseAuth mFireBaseAuth;
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+
     //Twitter
     @BindView(R.id.twitter_login_button)
     TwitterLoginButton loginButton;
@@ -68,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     //Facebook
     static LoginManager loginManager;
     CallbackManager callbackManager;
+
     @BindView(R.id.btn_facebook_login)
     LoginButton btnFacebookLogin;
 
@@ -76,7 +78,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     GoogleApiClient mGoogleApiClient;
     @BindView(R.id.btn_google_login)
     SignInButton btnGoogleLogin;
-
     @OnClick(R.id.btn_google_login)
     public void googleSignIn(View v) {
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
@@ -100,7 +101,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser firebaseUser = firebaseAuth.getCurrentUser();
                 if (firebaseUser != null) {
-                    // User signed in. Now, You can get UserId by calling firebaseUser.getUid() and save it in preference
+                    // User signed in.
+                    // Now, You can get UserId by calling firebase User.getUid() and save it in preference
+                    //Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                    //startActivity(intent);
+                    //finish();
+
                 } else {
                     // User signed out. Now, You can clear the preference.
                 }
@@ -121,7 +127,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
                 Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_LONG).show();
                 handleTwitterSession(result.data);
             }
-
             @Override
             public void failure(TwitterException exception) {
                 Log.d("TwitterKit", "Login with Twitter failure", exception);
@@ -173,6 +178,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
             }
 
+
             @Override
             public void onError(FacebookException error) {
                 Toast.makeText(LoginActivity.this, "Facebook Sign in failed. Please try again", Toast.LENGTH_SHORT).show();
@@ -214,10 +220,12 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
                         if (!task.isSuccessful()) {
                             // Handle authentication failure
-                            Log.e(LoginActivity.this.getLocalClassName(),"Authentication with firebase/facebook failed");
+                            Toast.makeText(LoginActivity.this, "Authentication failed",
+                                    Toast.LENGTH_SHORT).show();
+                            Log.e(LoginActivity.this.getLocalClassName(), "Authentication with firebase/facebook failed");
                         } else {
                             // Do whatever you want on successful authentication
-                            Log.e(LoginActivity.this.getLocalClassName(),"Authentication with firebase/facebook success");
+                            Log.e(LoginActivity.this.getLocalClassName(), "Authentication with firebase/facebook success");
                             goToMain();
                         }
                     }
