@@ -145,6 +145,7 @@ public class ChatActivity extends AppCompatActivity {
             textMessage.setAvatarUrl("https://lh3.googleusercontent.com/-Y86IN-vEObo/AAAAAAAAAAI/AAAAAAAKyAM/6bec6LqLXXA/s0-c-k-no-ns/photo.jpg");
             textMessage.setSource(MessageSource.EXTERNAL_USER);
 
+
             slyceMessagingFragment.addNewMessage(textMessage);
         } catch (IOException ioe) {
             System.out.print(ioe.toString());

@@ -11,14 +11,16 @@ import com.nishitadutta.brainapp.R;
 import com.nishitadutta.brainapp.Utils.SharedPreferenceUtils;
 import com.twitter.sdk.android.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
+
 import io.fabric.sdk.android.Fabric;
+import com.viksaa.sssplash.lib.model.ConfigSplash;
 
 public class MainActivity extends AppCompatActivity{
 
     // Note: Your consumer key and secret should be obfuscated in your source code before shipping.
     private static final String TWITTER_KEY = "JLJE1Vqrb7dktIXCXlqTZTQ0I";
     private static final String TWITTER_SECRET = "OR4EZ46xhRB7Rkn3fXTdhhA8lOQiopgopLBtkQFlc51O02YetL";
-
+    private ConfigSplash mConfigSplash;
 
     public static final int RC_SIGN_IN=9001;
     @Override
@@ -30,11 +32,16 @@ public class MainActivity extends AppCompatActivity{
         Fabric.with(this, new Twitter(authConfig));
         //setContentView(R.layout.activity_main);
         FirebaseAuth auth= FirebaseAuth.getInstance();
+
+        /*intent=new Intent(this,YourActivity.class);
+        startActivity(intent);*/
+
         if(auth.getCurrentUser()==null) {
 
             Log.e(this.getLocalClassName(), "Not logged in");
             Intent in = new Intent(this, LoginActivity.class);
             startActivity(in);
+
             finish();
         }
         else{
@@ -43,5 +50,6 @@ public class MainActivity extends AppCompatActivity{
             startActivity(in);
             finish();
         }
+
     }
 }
