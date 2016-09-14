@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.firebase.ui.auth.AuthUI;
 import com.google.firebase.auth.FirebaseAuth;
 import com.nishitadutta.brainapp.R;
 import com.nishitadutta.brainapp.Utils.SharedPreferenceUtils;
@@ -33,7 +32,7 @@ public class MainActivity extends AppCompatActivity{
         //setContentView(R.layout.activity_main);
         FirebaseAuth auth= FirebaseAuth.getInstance();
 
-        /*intent=new Intent(this,YourActivity.class);
+        /*intent=new Intent(this,SplashActivity.class);
         startActivity(intent);*/
 
         if(auth.getCurrentUser()==null) {

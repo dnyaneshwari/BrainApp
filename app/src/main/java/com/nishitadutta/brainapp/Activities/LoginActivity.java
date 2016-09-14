@@ -74,9 +74,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
     @BindView(R.id.btn_facebook_login)
     LoginButton btnFacebookLogin;
 
-    @BindView(R.id.particle_view)
-    ParticleView particleView;
-
     //Google
     private static final int REQUEST_CODE_GOOGLE_SIGN_IN = 9001;
     GoogleApiClient mGoogleApiClient;
@@ -96,9 +93,6 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
         FacebookSdk.sdkInitialize(getApplicationContext());
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
-
-        particleView.startAnim();
-
         //Firebase
         mFireBaseAuth = FirebaseAuth.getInstance();
 
@@ -311,6 +305,7 @@ public class LoginActivity extends AppCompatActivity implements GoogleApiClient.
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
         Log.d(LOG_TAG, "onConnectionFailed:" + connectionResult);
         Toast.makeText(this, "Google Play Services error.", Toast.LENGTH_SHORT).show();
     }

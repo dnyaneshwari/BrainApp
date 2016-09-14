@@ -11,4 +11,7 @@
         <item>public_profile</item>
         <item>email</item>
     </array>
+    <string name="com.nuance.appKey" translatable="false">8e5de62d9ef1c3b83594992026e33b7fbaa0ed579c73e857149ea7869131711f8e584d2c4910e47ea47d9eca60d94a1b79377216aa5a6dbef914448a45b6a9d3</string>
+    <string name="com.nuance.url" translatable="false"> nmsps://NMDPPRODUCTION_Twitter_Fabric_BrainApp_20160907053758@jxj.nmdp.nuancemobility.net:443</string>
+
 </resources>

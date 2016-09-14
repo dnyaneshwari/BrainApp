@@ -1,5 +1,8 @@
 package com.nishitadutta.brainapp.Objects;
 
+import android.text.Html;
+import android.text.Spanned;
+
 /**
  * Created by Nishita on 05-09-2016.
  */
@@ -13,8 +16,9 @@ public class BrainResponse {
     public BrainResponse() {
     }
 
-    public String getCnt() {
-        return cnt;
+    public Spanned getCnt() {
+        Spanned htmlCnt= Html.fromHtml(cnt);
+        return htmlCnt;
     }
 }
 
