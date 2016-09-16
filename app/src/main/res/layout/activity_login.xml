@@ -16,8 +16,7 @@
         android:layout_gravity="center"
         android:layout_margin="5dp"
         android:shadowColor="@color/colorPrimaryDark"
-        android:shadowRadius="1000"
-        android:shadowDx="100"/>
+        />
 
 
     <com.google.android.gms.common.SignInButton
