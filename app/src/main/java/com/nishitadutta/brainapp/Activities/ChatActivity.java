@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.webkit.CookieManager;
 import android.webkit.CookieSyncManager;
 import android.widget.Toast;
@@ -34,16 +37,22 @@ import org.androidannotations.annotations.OptionsItem;
 import org.androidannotations.annotations.OptionsMenu;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import it.slyce.messaging.SlyceMessagingFragment;
 import it.slyce.messaging.listeners.UserClicksAvatarPictureListener;
 import it.slyce.messaging.listeners.UserSendsMessageListener;
+import it.slyce.messaging.message.Message;
 import it.slyce.messaging.message.MessageSource;
 import it.slyce.messaging.message.TextMessage;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Nishita on 04-09-2016.
@@ -97,7 +106,7 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
                         }
                     });
         }
-    }
+        }
 
     private void goToMain() {
         Intent intent = new Intent(this, MainActivity.class);
@@ -177,9 +186,9 @@ public class ChatActivity extends AppCompatActivity implements GoogleApiClient.O
             textMessage.setDate(new Date().getTime());
             textMessage.setDisplayName("Manisha");
             textMessage.setUserId("ROBO");
-            textMessage.setAvatarUrl("https://lh3.googleusercontent.com/-Y86IN-vEObo/AAAAAAAAAAI/AAAAAAAKyAM/6bec6LqLXXA/s0-c-k-no-ns/photo.jpg");
+            //textMessage.setAvatarUrl("https://lh3.googleusercontent.com/-Y86IN-vEObo/AAAAAAAAAAI/AAAAAAAKyAM/6bec6LqLXXA/s0-c-k-no-ns/photo.jpg");
+            textMessage.setAvatarUrl("https://pressdispensary.co.uk/q991744/images/aco_bot.jpg");
             textMessage.setSource(MessageSource.EXTERNAL_USER);
-
 
             slyceMessagingFragment.addNewMessage(textMessage);
         } catch (IOException ioe) {
